@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast Cover Studio</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">NC</span><span>Neon Coast <em>Cover Studio</em></span></div>
+  <p class="tagline">Any photo. Six layouts. One click, three sizes.</p>
+</header>
+<main class="studio">
+  <section class="stage">
+    <canvas id="preview" width="760" height="428" aria-label="Live cover preview"></canvas>
+    <p class="hint">Click a panel to select it · drag to move its photo · scroll to zoom it</p>
+  </section>
+  <aside class="panel">
+    <section class="group">
+      <h2>Photos</h2>
+      <label class="file-btn">Add your photos
+        <input id="photo" type="file" accept="image/*" multiple hidden>
+      </label>
+      <div class="row">
+        <button id="sample-pier" type="button">Sample: Pier</button>
+        <button id="sample-boulevard" type="button">Sample: Boulevard</button>
+      </div>
+      <div id="photo-tray" class="tray" aria-label="Loaded photos"></div>
+      <div class="row">
+        <button id="fill-all" type="button">One photo, all panels</button>
+        <button id="spread" type="button">Spread photos</button>
+      </div>
+      <p class="note">Photos are read on your machine and never uploaded.</p>
+    </section>
+    <section class="group">
+      <h2>Layout</h2>
+      <div id="layout-picker" class="picker"></div>
+    </section>
+    <section class="group">
+      <h2>Grade</h2>
+      <div id="grade-picker" class="picker"></div>
+      <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+    </section>
+    <section class="group">
+      <h2>Lettering</h2>
+      <label>Caption <input id="caption" type="text" maxlength="30" value="NEON COAST"></label>
+      <label>Neon script <input id="subtitle" type="text" maxlength="30" value="vice city nights"></label>
+      <label>Badge <input id="badge" type="text" maxlength="16" value="EST. 2026"></label>
+    </section>
+    <section class="group">
+      <h2>Preview size</h2>
+      <div id="size-picker" class="picker"></div>
+      <div class="row">
+        <button id="zoom-out" type="button">Zoom −</button>
+        <button id="zoom-in" type="button">Zoom +</button>
+      </div>
+    </section>
+    <button id="export-all" type="button" class="export">Export all 3 sizes ↓</button>
+    <p id="status" role="status">Pick a photo to start — two samples are loaded for you.</p>
+  </aside>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
