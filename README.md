@@ -1,8 +1,8 @@
 # Neon Coast Cover Studio
 
-[![make.fun — gta6-cover-art-01](https://img.shields.io/badge/make.fun-gta6--cover--art--01-ff2d95)](https://make.fun/bounty/gta6-cover-art-01)
-[![offline — no upload](https://img.shields.io/badge/offline-no%20upload-22d3ee)](https://make.fun/bounty/gta6-cover-art-01)
-[![export — 3 sizes, 1 click](https://img.shields.io/badge/export-3%20sizes%2C%201%20click-ffd166)](https://make.fun/bounty/gta6-cover-art-01)
+[![make.fun · gta6-cover-art-01](https://make.fun/badge/gta6-cover-art-01.svg)](https://make.fun/bounty/gta6-cover-art-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
+[![rank](https://make.fun/badge/gta6-cover-art-01/people871/makefun-gta6-cover-art-01/rank.svg)](https://make.fun/bounty/gta6-cover-art-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
+[![reward](https://make.fun/badge/gta6-cover-art-01/people871/makefun-gta6-cover-art-01/reward.svg)](https://make.fun/bounty/gta6-cover-art-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
 
 An offline cover-art maker for **make.fun's "Make GTA 6 Cover Art" bounty
 (gta6-cover-art-01)**: it turns any photo and a caption into multi-panel,
