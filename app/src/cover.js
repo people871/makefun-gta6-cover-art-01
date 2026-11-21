@@ -1,6 +1,7 @@
 // Neon Coast cover renderer: turns loaded photos, a caption and a grade into
-// poster art on any 2D canvas. Layouts, gradient-map grades, grain, vignette,
-// halftone title bands and OFL display lettering — all drawn by this file.
+// poster art on any 2D canvas. Seven layouts, six gradient-map grades,
+// grain, vignette, halftone title bands and OFL display lettering — every
+// pixel on the cover is drawn by this file, nothing is fetched.
 
 export const SIZES = [
   { id: 'square', label: 'Square 1080 × 1080', w: 1080, h: 1080 },
@@ -15,6 +16,7 @@ export const LAYOUTS = [
   { id: 'tilted', name: 'Tilted Snapshot', slots: 3 },
   { id: 'strip', name: 'Vertical Strip', slots: 3 },
   { id: 'slice', name: 'Diagonal Vice Slice', slots: 7 },
+  { id: 'sleeve', name: 'Sunset Sleeve', slots: 4 },
 ];
 
 // A grade is a three-stop gradient map: shadows, midtones and highlights each
@@ -45,6 +47,11 @@ export const GRADES = [
     id: 'heat', name: 'Heat Haze',
     shadow: [32, 22, 4], mid: [255, 172, 42], high: [192, 255, 222],
     blend: 0.8, wash: ['#f59e0b', '#34d399'],
+  },
+  {
+    id: 'teal', name: 'Palm Teal',
+    shadow: [6, 32, 40], mid: [0, 190, 164], high: [255, 238, 168],
+    blend: 0.85, wash: ['#0d9488', '#fbbf24'],
   },
 ];
 
@@ -83,9 +90,11 @@ export function syncSlots(state) {
     const i = state.slots.length;
     // The first panel is usually the hero: bias its crop a little high so a
     // face lands in frame instead of being centred out of it. The slice
-    // layout's short story frames get the same treatment, more so.
-    const storyFrame = state.layout === 'slice' && i >= 3;
-    const cy = i === 0 ? 0.35 : storyFrame ? 0.28 : 0.4;
+    // layout's short story frames get the same treatment, more so. The
+    // sleeve's tall spine panel wants a centred crop instead.
+    let cy = 0.4;
+    if (i === 0) cy = state.layout === 'sleeve' ? 0.5 : 0.35;
+    else if (state.layout === 'slice' && i >= 3) cy = 0.28;
     state.slots.push({ photo: state.photos.length ? i % state.photos.length : 0, cx: 0.5, cy, zoom: 1 });
   }
   state.slots.length = want;
@@ -164,6 +173,28 @@ export function layoutGeometry(layoutId) {
         panels,
         strip: { x: 0, y: 0.68, w: 1, h: 0.22 },
         title: { x: 0.03, y: 0.05, w: 0.72, h: 0.17, align: 'left', scrim: false, halftone: false, badge: false, rot: -6 },
+      };
+    }
+    case 'sleeve': {
+      // Sunset Sleeve: a tall "spine" photo down the left edge like a record
+      // sleeve, a wide hero panel, and two thumbs underneath it. The title
+      // sits on the hero's lower edge over a scrim, badge at its right.
+      const spine = 0.16;
+      const heroH = 0.6;
+      const hx = spine + g;
+      const hw = 1 - hx;
+      const tw = (hw - g) / 2;
+      const ty = heroH + g;
+      const th = 1 - ty;
+      return {
+        bg: '#12081f',
+        panels: [
+          { x: 0, y: 0, w: spine, h: 1 },
+          { x: hx, y: 0, w: hw, h: heroH },
+          { x: hx, y: ty, w: tw, h: th },
+          { x: hx + tw + g, y: ty, w: tw, h: th },
+        ],
+        title: { x: hx + 0.025, y: 0.44, w: hw - 0.05, h: 0.15, align: 'left', scrim: true, halftone: false, badge: true },
       };
     }
     case 'hero-three':

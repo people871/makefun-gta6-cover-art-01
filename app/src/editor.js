@@ -1,6 +1,7 @@
 // Neon Coast editor: wires the controls to the renderer, loads photos from
 // the machine (FileReader, never uploaded), lets each panel be cropped and
-// positioned by drag and zoom, and exports all three post sizes in one click.
+// positioned by drag and zoom, rolls a random layout + grade on "Surprise
+// me", and exports all three poster sizes in one click.
 import { freshState, sizeById, syncSlots, renderCover, panelAt, layoutGeometry, LAYOUTS, GRADES, SIZES } from './cover.js';
 
 const SAMPLES = ['pier', 'boulevard'];
@@ -41,6 +42,13 @@ function downloadBlob(blob, name) {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+// Picks a different item from a list than the one currently chosen, so a
+// surprise roll always visibly changes the cover.
+function differentPick(list, currentId) {
+  const others = list.filter((item) => item.id !== currentId);
+  return others[Math.floor(Math.random() * others.length)];
 }
 
 export function createStudio(doc) {
@@ -236,6 +244,17 @@ export function createStudio(doc) {
       say('Photos spread across the panels.');
       render();
     });
+    el(doc, 'surprise').addEventListener('click', () => {
+      const layout = differentPick(LAYOUTS, state.layout);
+      const grade = differentPick(GRADES, state.grade);
+      state.layout = layout.id;
+      state.grade = grade.id;
+      selected = 0;
+      document.querySelectorAll('#layout-picker .pick').forEach((x) => x.classList.toggle('on', x.dataset.layout === layout.id));
+      document.querySelectorAll('#grade-picker .pick').forEach((x) => x.classList.toggle('on', x.dataset.grade === grade.id));
+      say(`Surprise: ${layout.name} + ${grade.name}. Roll again for another look.`);
+      render();
+    });
     el(doc, 'zoom-in').addEventListener('click', () => { bumpZoom(1.15); });
     el(doc, 'zoom-out').addEventListener('click', () => { bumpZoom(1 / 1.15); });
     el(doc, 'export-all').addEventListener('click', async () => {
@@ -319,8 +338,18 @@ export function createStudio(doc) {
     exportAll,
     selectPanel(i) { selected = i; render(); },
     setCaption(text) { state.caption = text; el(doc, 'caption').value = text; },
-    setLayout(id) { state.layout = id; selected = 0; },
-    setGrade(id) { state.grade = id; },
-    setSize(id) { state.size = id; },
+    setLayout(id) {
+      state.layout = id;
+      selected = 0;
+      document.querySelectorAll('#layout-picker .pick').forEach((x) => x.classList.toggle('on', x.dataset.layout === id));
+    },
+    setGrade(id) {
+      state.grade = id;
+      document.querySelectorAll('#grade-picker .pick').forEach((x) => x.classList.toggle('on', x.dataset.grade === id));
+    },
+    setSize(id) {
+      state.size = id;
+      document.querySelectorAll('#size-picker .pick').forEach((x) => x.classList.toggle('on', x.dataset.size === id));
+    },
   };
 }
