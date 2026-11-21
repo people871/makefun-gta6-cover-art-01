@@ -12,15 +12,18 @@ uploaded.
 
 ## What it does
 
-- **6 layouts** — Hero and Three, Grid 2×2, Full-Bleed + Title Block, Tilted
-  Snapshot, Vertical Strip, and an original **Diagonal Vice Slice**: three
-  slanted parallelogram panels over a four-frame film story strip.
-- **5 gradient-map grades** — Sunset, Neon Vice, Dusk Purple, Mono Noir and
-  Heat Haze — each a real per-channel colour map, plus film grain, a vignette
-  and a halftone title block.
+- **7 layouts** — Hero and Three, Grid 2×2, Full-Bleed + Title Block, Tilted
+  Snapshot, Vertical Strip, the original **Diagonal Vice Slice** (three
+  slanted parallelogram panels over a four-frame film story strip), and the
+  new **Sunset Sleeve** (a tall spine photo down the left edge, a wide hero
+  panel, and two thumbs underneath).
+- **6 gradient-map grades** — Sunset, Neon Vice, Dusk Purple, Mono Noir,
+  Heat Haze, and the new Palm Teal — each a real per-channel colour map,
+  plus film grain, a vignette and a halftone title block.
 - **Any photo** — load your own photos (or use the two built-in samples), put
   one photo across several panels or different photos in each, and crop and
-  position every panel by dragging and scrolling to zoom.
+  position every panel by dragging and scrolling to zoom. **Surprise me**
+  rolls a random layout + grade in one click.
 - **Lettering** — Anton display caps, a Pacifico neon script subtitle and a
   Bebas Neue badge ribbon, all OFL fonts shipped under `app/fonts/`. The
   caption, subtitle and badge are all editable; the default — NEON COAST /
@@ -42,9 +45,9 @@ Pick a photo, choose a layout and a grade, edit the caption, drag a panel's
 photo into place, then **Export all 3 sizes**.
 
 Deterministic screenshot scenes live behind `?shot=` hooks, e.g.
-`?shot=cover&photo=pier&caption=Neon%20Coast&layout=slice&grade=neon&size=wide`
-renders one cover alone; `?shot=editor&photo=pier` opens the studio with a
-photo loaded. See `shots.json`.
+`?shot=cover&photo=pier&caption=Neon%20Coast&layout=sleeve&grade=teal&size=wide`
+renders the new Sunset Sleeve cover alone; `?shot=editor&photo=pier` opens
+the studio with a photo loaded. See `shots.json`.
 
 ## Handing it in
 

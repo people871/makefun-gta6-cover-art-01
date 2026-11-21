@@ -32,6 +32,10 @@ const TYPES: Record<string, string> = {
 
 createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://127.0.0.1');
+  if (url.pathname === '/__health') {
+    res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' }).end('ok');
+    return;
+  }
   let path = url.pathname;
   try {
     path = decodeURIComponent(path);

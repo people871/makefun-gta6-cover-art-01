@@ -31,4 +31,4 @@ const dossier = buildDossier(outDir, {
   app_path_max_bytes: 1000,
 });
 writeFileSync(join(outDir, 'dossier.json'), dossier);
-console.log(`Neon Coast Cover Studio written to ${outDir}`);
+console.log(`Neon Coast Cover Studio written to ${outDir} (7 layouts, 6 grades, 3 sizes)`);
